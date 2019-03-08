@@ -7,5 +7,9 @@ echo $r
 
 #run app
 chmod +x gradlew
-./gradlew build
+./gradlew build  -x test
 
+
+command -v docker-compose >/dev/null 2>&1 || { echo >&2 "docker compose is required. Aborting."; exit 1; }
+
+docker-compose up
