@@ -1,4 +1,4 @@
-package com.pismotransaction.pismotransaction
+package com.pismotransaction
 
 import org.junit.Test
 import org.junit.runner.RunWith

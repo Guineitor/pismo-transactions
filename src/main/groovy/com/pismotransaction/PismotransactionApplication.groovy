@@ -1,4 +1,4 @@
-package com.pismotransaction.pismotransaction
+package com.pismotransaction
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
