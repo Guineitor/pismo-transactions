@@ -6,6 +6,7 @@ echo $r
 
 
 #run app
+cd $r/transactions
 chmod +x gradlew
 ./gradlew build  -x test
 

@@ -1,4 +1,4 @@
-package com.pismotransaction.domain.account
+package com.transactions.domain.account
 
 import com.sun.xml.internal.ws.api.message.ExceptionHasMessage
 import com.sun.xml.internal.ws.api.message.Message

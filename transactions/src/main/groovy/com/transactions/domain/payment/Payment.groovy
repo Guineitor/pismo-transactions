@@ -1,4 +1,4 @@
-package com.pismotransaction.domain.payment
+package com.transaction.domain.payment
 
 class Payment {
      Long accountId

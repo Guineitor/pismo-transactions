@@ -1,4 +1,4 @@
-package com.pismotransaction.domain.account
+package com.transactions.domain.account
 
 
 class AccountService implements IAccountService {

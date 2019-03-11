@@ -1,4 +1,4 @@
-package com.pismotransaction.domain.account
+package com.transactions.domain.account
 
 interface IAccountService {
     Account create(BigDecimal creditLimit, BigDecimal withdrawalLimit)

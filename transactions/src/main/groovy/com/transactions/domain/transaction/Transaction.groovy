@@ -1,4 +1,4 @@
-package com.pismotransaction.domain.transaction
+package com.transactions.domain.transaction
 
 import com.pismotransaction.domain.OperationsTypes
 

@@ -1,4 +1,4 @@
-package com.pismotransaction.domain
+package com.transactions.domain
 
 enum OperationsTypes {
     CASH_PURCHASE("COMPRA A VISTA", 2),
