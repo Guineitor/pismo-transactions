@@ -1,4 +1,4 @@
-package com.transaction.domain.payment
+package com.transactions.domain.payment
 
 class Payment {
      Long accountId

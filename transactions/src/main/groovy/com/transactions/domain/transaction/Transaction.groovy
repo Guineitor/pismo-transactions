@@ -1,6 +1,6 @@
 package com.transactions.domain.transaction
 
-import com.pismotransaction.domain.OperationsTypes
+import com.transactions.domain.OperationsTypes
 
 import javax.persistence.*
 

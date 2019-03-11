@@ -1,11 +1,15 @@
 package com.transactions.domain.account
 
+import org.springframework.beans.factory.annotation.Autowired
 
 class AccountService implements IAccountService {
 
+    @Autowired
+    AccountRepository _repo
+
     @Override
     Account create(BigDecimal creditLimit, BigDecimal withdrawalLimit) {
-        return null
+        return new Account(50G, 50G);
     }
 
     @Override
@@ -14,12 +18,8 @@ class AccountService implements IAccountService {
     }
 
     @Override
-    List<Account> findAll() {
-        return null
+    Account findBy(Long id) {
+        return new Account(50G, 50G);
     }
 
-    @Override
-    Account findBy(Long id) {
-        return null
-    }
 }
