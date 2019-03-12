@@ -1,5 +1,6 @@
 package com.pismo.transactions.domain.account
 
+import com.pismo.transactions.domain.OperationsTypes
 import com.pismo.transactions.repositories.AccountRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -26,5 +27,6 @@ class AccountService {
     Account findBy(Long id) {
         accountRepository.findById(id).orElseThrow {new RuntimeException("Account with id: " + id + " not found")}
     }
+
 
 }

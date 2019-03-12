@@ -1,6 +1,7 @@
 package com.pismo.transactions.domain.transaction
 
 import com.pismo.transactions.domain.OperationsTypes
+import com.pismo.transactions.domain.account.AccountService
 import com.pismo.transactions.domain.payment.Payment
 import com.pismo.transactions.repositories.TransactionRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,11 +14,14 @@ class TransactionService {
     @Autowired
     TransactionRepository transactionRepository
 
+    @Autowired
+    AccountService accountService
+
+
     Transaction addTransaction(Long accountId, OperationsTypes operation, BigDecimal amount) {
-        createTransaction( accountId,  operation,  amount)
+        createTransaction(accountId, operation, amount)
 
     }
-
 
 
     Transaction createTransaction(Long accountId, OperationsTypes operation, BigDecimal amount) {
@@ -32,30 +36,34 @@ class TransactionService {
 
         for (payment in payments) {
 
-            Transaction paymentoTransac = createTransaction(payment.accountId, OperationsTypes.PAYMENT ,payment.amount)
+            Transaction paymentoTransac = createTransaction(payment.accountId, OperationsTypes.PAYMENT, payment.amount)
             transactions.add(paymentoTransac)
 
             List<Transaction> unpaidTransactions = transactionRepository.listUnpaidTransactionsBy(payment.getAccountId())
 
-            List<Transaction> unpaidTransactionsSorted =  unpaidTransactions.sort{ x, y -> x.operation.chargeOrder <=> y.eventDate}
+            List<Transaction> unpaidTransactionsSorted = unpaidTransactions.sort { x -> x.operation.chargeOrder}
+            unpaidTransactionsSorted = unpaidTransactionsSorted.sort { y -> y.eventDate}
 
-            for ( unpaid in unpaidTransactionsSorted) {
+            for (unpaid in unpaidTransactionsSorted) {
+
                 BigDecimal balance = unpaid.balance
                 balance = balance.add(payment.amount)
 
 
                 if (balance.signum() <= 0) {
-                    unpaid.setBalance(balance);
-                    paymentoTransac.setBalance(new BigDecimal(0));
-                    break;
+                    unpaid.setBalance balance
+                    changeAvailableCredit(payment.accountId,  unpaid.operation, payment.amount)
+                    paymentoTransac.setBalance(new BigDecimal(0))
+                    break
 
                 } else {
-                    payment.setAmount(balance);
+                    payment.setAmount balance
+                    changeAvailableCredit(payment.accountId, unpaid.operation, unpaid.balance.negate())
+                    paymentoTransac.balance = balance
+                    unpaid.balance = new BigDecimal(0)
 
                 }
-
             }
-
         }
         transactions.toList()
     }
@@ -66,4 +74,12 @@ class TransactionService {
     }
 
 
+    private changeAvailableCredit(Long accountId, OperationsTypes operation, BigDecimal amount) {
+        if (operation.equals(OperationsTypes.CASH_PURCHASE) || operation.equals(OperationsTypes.INSTALLMENT_PURCHASE)) {
+            accountService.changeLimits(accountId, amount, new BigDecimal(0));
+        } else {
+            accountService.changeLimits(accountId, new BigDecimal(0), amount);
+        }
+
+    }
 }
