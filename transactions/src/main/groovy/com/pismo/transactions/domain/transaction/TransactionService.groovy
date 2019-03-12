@@ -1,6 +1,7 @@
 package com.pismo.transactions.domain.transaction
 
 import com.pismo.transactions.domain.OperationsTypes
+import com.pismo.transactions.domain.payment.Payment
 import com.pismo.transactions.repositories.TransactionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -16,5 +17,11 @@ class TransactionService {
         Transaction transaction = new Transaction(accountId, operation, amount, amount, now, now)
         transactionRepository.save(transaction)
     }
+
+    List<Transaction> CreatePayment(List<Payment> payments) {
+
+    }
+
+
 
 }
