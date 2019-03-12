@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired
 
 
 import com.transactions.domain.OperationsTypes
-import com.transactions.domain.payment.Payment
 
 class TransactionService implements ITransactionService {
     private TransactionRepository transactionRepository;

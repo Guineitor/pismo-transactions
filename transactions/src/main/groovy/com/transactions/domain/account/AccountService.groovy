@@ -1,25 +1,29 @@
 package com.transactions.domain.account
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
-class AccountService implements IAccountService {
+@Service
+class AccountService {
 
     @Autowired
-    AccountRepository _repo
+    AccountRepository accountRepository
 
-    @Override
     Account create(BigDecimal creditLimit, BigDecimal withdrawalLimit) {
-        return new Account(50G, 50G);
+        accountRepository.save(new Account(creditLimit, withdrawalLimit))
     }
 
-    @Override
     Account changeLimits(Long id, BigDecimal creditLimit, BigDecimal withdrawalLimit) {
-        return null
+        Account account = accountRepository.findById(id).orElseThrow {new RuntimeException("Account with id: " + id + " not found")}
+
+        account.availableWithdrawalLimit = account.availableWithdrawalLimit.add(withdrawalLimit)
+        account.availableCreditLimit = account.availableCreditLimit.add(creditLimit)
+
+        accountRepository.save(account)
     }
 
-    @Override
     Account findBy(Long id) {
-        return new Account(50G, 50G);
+        accountRepository.findById(id).orElseThrow {new RuntimeException("Account with id: " + id + " not found")}
     }
 
 }

@@ -1,9 +1,11 @@
 package com.transactions.domain.account
 
-import com.sun.xml.internal.ws.api.message.ExceptionHasMessage
-import com.sun.xml.internal.ws.api.message.Message
-
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
 @Table(name = "accounts")

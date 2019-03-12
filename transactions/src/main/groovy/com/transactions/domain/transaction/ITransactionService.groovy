@@ -1,6 +1,6 @@
 package com.transactions.domain.transaction
 
-import com.transactions.domain.payment.Payment
+
 import com.transactions.domain.OperationsTypes
 
 interface ITransactionService {
