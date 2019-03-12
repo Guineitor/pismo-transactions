@@ -19,7 +19,28 @@ class TransactionService {
 
 
     Transaction addTransaction(Long accountId, OperationsTypes operation, BigDecimal amount) {
-        createTransaction(accountId, operation, amount)
+
+        BigDecimal originalAmount = amount;
+        List<Transaction> positiveTransactions = transactionRepository.listPositiveTransactionBy(accountId);
+
+        positiveTransactions.each { positiv ->
+            if (positiv.getBalance().compareTo(amount) > 0) {
+                BigDecimal newBalance = positiv.getBalance().subtract(amount)
+                positiv.balance = newBalance
+                amount = new BigDecimal(0);
+            } else {
+                amount = amount.subtract(positiv.balance)
+                positiv.balance = new BigDecimal(0)
+            }
+
+        }
+
+
+        amount = amount.negate();
+
+        Transaction transaction =  createTransaction(accountId, operation, amount)
+        changeAvailableCredit(accountId, operation , amount)
+        transaction
 
     }
 
