@@ -21,6 +21,6 @@ class PaymentController {
 
     @PostMapping("/v1/payments")
     List<Transaction> CreatePayment(@RequestBody List<Payment> list ) {
-        transactionService.CreatePayment(list)
+        transactionService.addPayment(list)
     }
 }

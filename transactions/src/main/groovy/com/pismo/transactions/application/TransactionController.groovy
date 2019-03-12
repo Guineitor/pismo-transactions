@@ -17,9 +17,16 @@ class TransactionController {
     @Autowired
     TransactionService transactionService
 
+
+    @GetMapping("/v1/transactions/{id}")
+    List<Transaction> list(@PathVariable Long id){
+        transactionService.findAll(id)
+    }
+
+
     @PostMapping("/v1/transactions")
     Transaction save(@RequestBody TransactionRequest params) {
-        transactionService.createTransaction(
+        transactionService.addTransaction(
                 params?.accountId, params?.operation, params?.amount
         )
     }
