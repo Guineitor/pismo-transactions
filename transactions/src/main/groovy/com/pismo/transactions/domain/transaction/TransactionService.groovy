@@ -5,6 +5,7 @@ import com.pismo.transactions.domain.payment.Payment
 import com.pismo.transactions.repositories.TransactionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.List;
 
 @Service
 class TransactionService {
@@ -19,9 +20,11 @@ class TransactionService {
     }
 
     List<Transaction> CreatePayment(List<Payment> payments) {
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>()
 
+        for (payment in payments) {
+            transactions.add(createTransaction(payment.accountId, OperationsTypes.PAYMENT ,payment.amount))
+        }
+        transactions.toList()
     }
-
-
-
 }

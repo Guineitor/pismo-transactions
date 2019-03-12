@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 
+import java.util.List;
+
+
 @RestController
 class PaymentController {
 
@@ -17,7 +20,7 @@ class PaymentController {
 
 
     @PostMapping("/v1/payments")
-    List<Transaction> CreatePayment(@RequestBody List<Payment > list ) {
+    List<Transaction> CreatePayment(@RequestBody List<Payment> list ) {
         transactionService.CreatePayment(list)
     }
 }

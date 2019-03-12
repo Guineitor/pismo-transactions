@@ -10,4 +10,7 @@ class Payment {
         this.amount = amount;
     }
 
+
+    Payment() {}
+
 }
