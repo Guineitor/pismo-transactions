@@ -1,5 +1,6 @@
 package com.pismo.transactions.application
 
+import com.pismo.transactions.application.request.AccountRequest
 import com.pismo.transactions.domain.account.Account
 import com.pismo.transactions.domain.account.AccountService
 import org.springframework.beans.factory.annotation.Autowired

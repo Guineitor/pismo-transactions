@@ -32,6 +32,7 @@ class Transaction {
     @Column(nullable = false)
     Date dueDate
 
+    protected Transaction(){}
 
     Transaction(Long accountId, OperationsTypes operation, BigDecimal amount, BigDecimal balance, Date eventDate, Date dueDate) {
         this.accountId = accountId

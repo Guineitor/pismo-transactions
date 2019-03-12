@@ -11,11 +11,10 @@ class TransactionService {
     @Autowired
     TransactionRepository transactionRepository
 
-    Transaction create(Long accountId, OperationsTypes operation, BigDecimal amount, BigDecimal balance, Date eventDate, Date dueDate){
-        transactionRepository.save(
-            new Transaction(
-                accountId,  operation,  amount,  balance,  eventDate,  dueDate
-            ))
+    Transaction createTransaction(Long accountId, OperationsTypes operation, BigDecimal amount) {
+        Date now = new Date()
+        Transaction transaction = new Transaction(accountId, operation, amount, amount, now, now)
+        transactionRepository.save(transaction)
     }
 
 }
