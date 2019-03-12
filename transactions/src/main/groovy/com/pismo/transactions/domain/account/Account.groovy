@@ -1,4 +1,4 @@
-package com.transactions.domain.account
+package com.pismo.transactions.domain.account
 
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -20,6 +20,8 @@ class Account {
 
     @Column(nullable = false)
     BigDecimal availableWithdrawalLimit
+
+    protected Account(){}
 
     Account(BigDecimal availableCreditLimit, BigDecimal availableWithdrawalLimit) {
         this.availableCreditLimit = availableCreditLimit != null ? availableCreditLimit : new BigDecimal(0)

@@ -1,5 +1,6 @@
-package com.transactions.domain.account
+package com.pismo.transactions.domain.account
 
+import com.pismo.transactions.repositories.AccountRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
