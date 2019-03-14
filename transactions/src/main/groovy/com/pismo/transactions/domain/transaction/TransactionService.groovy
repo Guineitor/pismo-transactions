@@ -64,12 +64,11 @@ class TransactionService {
 
             List<Transaction> unpaidTransactionsSorted = unpaidTransactions.sort { x -> x.operation.chargeOrder}
             unpaidTransactionsSorted = unpaidTransactionsSorted.sort { y -> y.eventDate}
-
+            BigDecimal diffConvered = new BigDecimal(0)
             for (unpaid in unpaidTransactionsSorted) {
 
                 BigDecimal balance = unpaid.balance
                 balance = balance.add(payment.amount)
-
 
                 if (balance.signum() <= 0) {
                     unpaid.setBalance balance
@@ -80,7 +79,7 @@ class TransactionService {
                 } else {
                     payment.setAmount balance
                     changeAvailableCredit(payment.accountId, unpaid.operation, unpaid.balance.negate())
-                    paymentoTransac.balance = balance
+                    paymentoTransac.setBalance balance
                     unpaid.balance = new BigDecimal(0)
 
                 }

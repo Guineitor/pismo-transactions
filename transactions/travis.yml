@@ -1,0 +1,28 @@
+
+#build library
+#gradle doesn't have a retry for assembling dependencies so here's one in bash
+install: ./gradlew assemble
+script: ./gradlew clean check cobertura Jar groovydoc
+
+matrix:
+  allow_failures:
+    - env: GROOVY_VERSION="2.5.1"
+
+branches:
+  only:
+    - master
+
+########################
+# Travis CI Options Only
+########################
+#Travis CI also uses some options in the Jenkins section above.
+#None of the following options are interpreted by Jenkins.
+
+#https://docs.travis-ci.com/user/languages/groovy#caching
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
